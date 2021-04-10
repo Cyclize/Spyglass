@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Spyglass</title>
+        <link rel="shortcut icon" type="image/png" href="/icon.png"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <style>
+            h1, p {
+                text-align: center;
+                margin: 0;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            body {
+                margin: 5em;
+            }
+            
+            table {
+                border-collapse: collapse;
+                margin: auto;
+                font-size: 0.9em;
+                font-family: 'Poppins', sans-serif;
+                width: 100%;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            }
+
+            thead tr {
+                background-color: #222;
+                color: #ffffff;
+                text-align: left;
+                font-size: large;
+            }
+
+            td {
+                padding: 12px 15px;
+            }
+
+            tbody tr:nth-of-type(even) {
+                background-color: #f3f3f3;
+            }
+
+            tbody tr:last-of-type {
+                border-bottom: 2px solid #222;
+            }
+        </style>
+    </head>
+    <body>
+		<h1 style="margin-bottom: .2em;">Spyglass</h1>
+        <p style="margin-bottom: 5em;">Made with ❤ by Cyclize</p>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+
+        <script type="text/javascript"charset="utf-8">
+		
+            d3.text("/data/anni-a.csv?t=" + new Date().valueOf(), function(data) {
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("body")
+                    var table = container.append("table")
+                        var thead = table.append("thead")
+                            var htr = thead.append("tr")
+                                var htd = htr.selectAll("td")
+                                    .data(parsedCSV[0]).enter()
+                                    .append("td")
+                                    .text(function(d) { return d; });
+                        var tbody = table.append("tbody")
+                            var btr = tbody.selectAll("tr")
+                                .data(parsedCSV.slice(1).reverse()).enter()
+                                .append("tr")
+                                var btd = btr.selectAll("td")
+                                    .data(function(d) { return d; }).enter()
+                                    .append("td")
+                                    .text(function(d) { return d; });
+            });
+        </script>
+    </body>
+</html>
